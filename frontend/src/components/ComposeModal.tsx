@@ -2,11 +2,11 @@
 
 import { useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
-import { XIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 
 interface ComposeModalProps {
-    isOpen: boolean
-    onClose: () => void
+    isOpen: boolean;
+    onClose: () => void;
 }
 
 export default function ComposeModal({ isOpen, onClose }: ComposeModalProps) {
@@ -67,7 +67,7 @@ export default function ComposeModal({ isOpen, onClose }: ComposeModalProps) {
                 <div className="flex justify-between items-center">
                     <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">New Message</h2>
                     <button onClick={onClose} className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-                        <XIcon className="h-5 w-5" />
+                        <XMarkIcon className="h-5 w-5" />
                     </button>
                 </div>
                 <div className="space-y-4">
