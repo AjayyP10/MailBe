@@ -15,7 +15,7 @@ export default function Dashboard() {
             {/* Header */}
             <header className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800">
                 <div className="flex items-center space-x-3">
-                    <Image src="/logo.svg" alt="MailBe" width={40} height={40} className="object-contain" />
+                    <Image src="/logo.png" alt="MailBe" width={40} height={40} className="object-contain" />
                     <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">MailBe</h1>
                 </div>
                 <button

@@ -20,43 +20,105 @@ export default function Login() {
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-gray-800 dark:via-gray-900 dark:to-black">
-            <div className="w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-xl shadow-2xl space-y-8">
-                {/* Logo placeholder */}
-                <div className="flex justify-center mb-4">
-                    <Image src="/logo.svg" alt="MailBe" width={80} height={80} className="object-contain" />
+        <div className="flex min-h-screen">
+            {/* Left Side - Hero Section */}
+            <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 p-12 flex-col justify-between text-white">
+                <div>
+                    <div className="flex items-center gap-3 mb-12">
+                        <Image src="/logo.png" alt="MailBe" width={50} height={50} className="object-contain" />
+                        <h1 className="text-3xl font-bold">MailBe</h1>
+                    </div>
+
+                    <div className="max-w-md">
+                        <h2 className="text-4xl font-bold mb-6">
+                            Master your inbox with AI-powered intelligence
+                        </h2>
+                        <p className="text-lg text-indigo-100 mb-12">
+                            Your personal AI email assistant that delivers smart replies, document search, and advanced phishing protection.
+                        </p>
+
+                        {/* Feature Cards */}
+                        <div className="space-y-4">
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 className="font-semibold">AI Smart Replies</h3>
+                                        <p className="text-sm text-indigo-100">Context-aware email responses</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 className="font-semibold">Document Search</h3>
+                                        <p className="text-sm text-indigo-100">Find files across cloud storage</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 className="font-semibold">Phishing Protection</h3>
+                                        <p className="text-sm text-indigo-100">AI-powered threat detection</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">
-                    Welcome to MailBe
-                </h1>
-                <button
-                    onClick={handleLogin}
-                    className="w-full flex items-center justify-center gap-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 font-medium py-3 px-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
-                >
-                    <svg
-                        className="w-5 h-5"
-                        viewBox="0 0 533.5 544.3"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M533.5 278.4c0-17.7-1.6-35-4.6-51.7H272v97.9h146.9c-6.4 34.9-25.6 64.5-54.5 84.3v70.1h88.1c51.6-47.5 81.5-117.5 81.5-200.6z"
-                            fill="#4285F4"
-                        />
-                        <path
-                            d="M272 544.3c73.6 0 135.4-24.5 180.5-66.5l-88.1-70.1c-24.5 16.5-55.8 26.2-92.4 26.2-71 0-131.2-47.9-152.8-112.3H30.5v70.7C75.9 475.5 167.5 544.3 272 544.3z"
-                            fill="#34A853"
-                        />
-                        <path
-                            d="M119.2 321.6c-10.5-31.5-10.5-65.5 0-97l-88.7-70.7C7.9 191.5 0 226.5 0 272s7.9 80.5 30.5 117.9l88.7-70.7z"
-                            fill="#FBBC05"
-                        />
-                        <path
-                            d="M272 107.7c39.9 0 75.8 13.7 104.1 40.6l78.2-78.2C418.2 24.5 356.4 0 272 0 167.5 0 75.9 68.8 30.5 166.1l88.7 70.7C140.8 155.6 201 107.7 272 107.7z"
-                            fill="#EA4335"
-                        />
-                    </svg>
-                    Sign in with Google
-                </button>
+
+                <div className="text-sm text-indigo-100">
+                    © 2025 MailBe. All rights reserved.
+                </div>
+            </div>
+
+            {/* Right Side - Login Form */}
+            <div className="flex-1 flex items-center justify-center p-8 bg-gray-50 dark:bg-gray-900">
+                <div className="w-full max-w-md">
+                    <div className="lg:hidden mb-8 text-center">
+                        <Image src="/logo.png" alt="MailBe" width={60} height={60} className="mx-auto mb-4" />
+                        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">MailBe</h1>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+                        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Welcome back</h2>
+                        <p className="text-gray-600 dark:text-gray-400 mb-8">Sign in to access your account</p>
+
+                        <button
+                            onClick={handleLogin}
+                            className="w-full flex items-center justify-center gap-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 font-medium py-3 px-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                        >
+                            <svg className="w-5 h-5" viewBox="0 0 533.5 544.3" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M533.5 278.4c0-17.7-1.6-35-4.6-51.7H272v97.9h146.9c-6.4 34.9-25.6 64.5-54.5 84.3v70.1h88.1c51.6-47.5 81.5-117.5 81.5-200.6z" fill="#4285F4" />
+                                <path d="M272 544.3c73.6 0 135.4-24.5 180.5-66.5l-88.1-70.1c-24.5 16.5-55.8 26.2-92.4 26.2-71 0-131.2-47.9-152.8-112.3H30.5v70.7C75.9 475.5 167.5 544.3 272 544.3z" fill="#34A853" />
+                                <path d="M119.2 321.6c-10.5-31.5-10.5-65.5 0-97l-88.7-70.7C7.9 191.5 0 226.5 0 272s7.9 80.5 30.5 117.9l88.7-70.7z" fill="#FBBC05" />
+                                <path d="M272 107.7c39.9 0 75.8 13.7 104.1 40.6l78.2-78.2C418.2 24.5 356.4 0 272 0 167.5 0 75.9 68.8 30.5 166.1l88.7 70.7C140.8 155.6 201 107.7 272 107.7z" fill="#EA4335" />
+                            </svg>
+                            Continue with Google
+                        </button>
+
+                        <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+                            By continuing, you agree to our Terms of Service and Privacy Policy.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

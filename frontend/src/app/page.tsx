@@ -7,7 +7,7 @@ export default function Home() {
             <div className="text-center space-y-8 max-w-4xl">
                 {/* Logo */}
                 <div className="flex justify-center mb-6">
-                    <Image src="/logo.svg" alt="MailBe" width={120} height={120} className="object-contain" />
+                    <Image src="/logo.png" alt="MailBe" width={120} height={120} className="object-contain" />
                 </div>
 
                 {/* Hero Section */}
