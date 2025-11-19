@@ -9,6 +9,11 @@ export default function Login() {
             provider: 'google',
             options: {
                 redirectTo: `${location.origin}/auth/callback`,
+                queryParams: {
+                    access_type: 'offline',
+                    prompt: 'consent',
+                    scope: 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send'
+                }
             },
         })
     }

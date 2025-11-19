@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.core.config import settings
 from supabase import create_client, Client
 
-from app.api import ai
+from app.api import ai, email
 
 app = FastAPI(title=settings.PROJECT_NAME)
 
@@ -10,6 +10,7 @@ app = FastAPI(title=settings.PROJECT_NAME)
 supabase: Client = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
 
 app.include_router(ai.router, prefix="/api/ai", tags=["AI"])
+app.include_router(email.router, prefix="/api/email", tags=["Email"])
 
 @app.get("/health")
 def health_check():

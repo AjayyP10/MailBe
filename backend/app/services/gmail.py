@@ -66,3 +66,27 @@ class GmailService:
             'body_text': body_text,
             'internalDate': msg['internalDate']
         }
+
+    def send_email(self, to_email: str, subject: str, body: str, thread_id: str = None):
+        from email.mime.text import MIMEText
+        from email.mime.multipart import MIMEMultipart
+
+        message = MIMEMultipart()
+        message['to'] = to_email
+        message['subject'] = subject
+        
+        msg = MIMEText(body, 'html')
+        message.attach(msg)
+
+        raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode('utf-8')
+        body = {'raw': raw_message}
+        
+        if thread_id:
+            body['threadId'] = thread_id
+
+        try:
+            message = self.service.users().messages().send(userId='me', body=body).execute()
+            return message
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return None
