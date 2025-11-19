@@ -11,7 +11,7 @@ export default function Dashboard() {
     const [isComposeOpen, setIsComposeOpen] = useState(false)
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-100 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700">
+        <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-100 to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700">
             {/* Header */}
             <header className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800">
                 <div className="flex items-center space-x-3">
@@ -20,7 +20,7 @@ export default function Dashboard() {
                 </div>
                 <button
                     onClick={() => setIsComposeOpen(true)}
-                    className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-full transition-colors"
+                    className="flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2 px-4 rounded-full transition-colors"
                 >
                     + Compose
                 </button>

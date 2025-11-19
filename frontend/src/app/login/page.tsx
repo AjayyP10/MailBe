@@ -22,7 +22,7 @@ export default function Login() {
     return (
         <div className="flex min-h-screen">
             {/* Left Side - Hero Section */}
-            <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 p-12 flex-col justify-between text-white">
+            <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-cyan-500 via-teal-500 to-green-500 p-12 flex-col justify-between text-white">
                 <div>
                     <div className="flex items-center gap-3 mb-12">
                         <Image src="/logo.png" alt="MailBe" width={50} height={50} className="object-contain" />
@@ -33,7 +33,7 @@ export default function Login() {
                         <h2 className="text-4xl font-bold mb-6">
                             Master your inbox with AI-powered intelligence
                         </h2>
-                        <p className="text-lg text-indigo-100 mb-12">
+                        <p className="text-lg text-cyan-100 mb-12">
                             Your personal AI email assistant that delivers smart replies, document search, and advanced phishing protection.
                         </p>
 
@@ -48,7 +48,7 @@ export default function Login() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold">AI Smart Replies</h3>
-                                        <p className="text-sm text-indigo-100">Context-aware email responses</p>
+                                        <p className="text-sm text-cyan-100">Context-aware email responses</p>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@ export default function Login() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold">Document Search</h3>
-                                        <p className="text-sm text-indigo-100">Find files across cloud storage</p>
+                                        <p className="text-sm text-cyan-100">Find files across cloud storage</p>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@ export default function Login() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold">Phishing Protection</h3>
-                                        <p className="text-sm text-indigo-100">AI-powered threat detection</p>
+                                        <p className="text-sm text-cyan-100">AI-powered threat detection</p>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@ export default function Login() {
                     </div>
                 </div>
 
-                <div className="text-sm text-indigo-100">
+                <div className="text-sm text-cyan-100">
                     © 2025 MailBe. All rights reserved.
                 </div>
             </div>

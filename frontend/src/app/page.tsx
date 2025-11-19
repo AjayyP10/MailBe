@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-gray-800 dark:via-gray-900 dark:to-black">
+        <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gradient-to-br from-cyan-100 via-teal-50 to-green-100 dark:from-gray-800 dark:via-gray-900 dark:to-black">
             <div className="text-center space-y-8 max-w-4xl">
                 {/* Logo */}
                 <div className="flex justify-center mb-6">
@@ -11,7 +11,7 @@ export default function Home() {
                 </div>
 
                 {/* Hero Section */}
-                <h1 className="text-6xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+                <h1 className="text-6xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 via-teal-600 to-green-600">
                     MailBe
                 </h1>
 
@@ -38,7 +38,7 @@ export default function Home() {
                 {/* CTA */}
                 <Link
                     href="/login"
-                    className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-4 px-10 rounded-full transition-all shadow-xl hover:shadow-2xl hover:scale-105"
+                    className="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-4 px-10 rounded-full transition-all shadow-xl hover:shadow-2xl hover:scale-105"
                 >
                     Get Started
                 </Link>
