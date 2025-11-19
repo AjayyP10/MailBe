@@ -1,13 +1,13 @@
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "MailMCP Backend"
+    PROJECT_NAME: str = "MailBe"
     SUPABASE_URL: str
     SUPABASE_KEY: str
     
     # Datadog
     DD_ENV: str = "development"
-    DD_SERVICE: str = "mailmcp-backend"
+    DD_SERVICE: str = "mailbe-backend"
     DD_VERSION: str = "0.1.0"
 
     # Google OAuth
