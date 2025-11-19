@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
+import { XIcon } from '@heroicons/react/24/outline'
 
 interface ComposeModalProps {
     isOpen: boolean
@@ -27,7 +28,7 @@ export default function ComposeModal({ isOpen, onClose }: ComposeModalProps) {
                 return
             }
 
-            // Get the first connected account for now (MVP)
+            // For MVP we just grab the first linked account
             const { data: account } = await supabase
                 .from('accounts')
                 .select('id')
@@ -41,20 +42,11 @@ export default function ComposeModal({ isOpen, onClose }: ComposeModalProps) {
 
             const response = await fetch('http://localhost:8000/api/email/send', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    account_id: account.id,
-                    to,
-                    subject,
-                    body
-                }),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ account_id: account.id, to, subject, body }),
             })
 
-            if (!response.ok) {
-                throw new Error('Failed to send email')
-            }
+            if (!response.ok) throw new Error('Failed to send email')
 
             alert('Email sent successfully!')
             onClose()
@@ -70,45 +62,37 @@ export default function ComposeModal({ isOpen, onClose }: ComposeModalProps) {
     }
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl p-6">
-                <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl font-bold text-gray-800 dark:text-white">New Message</h2>
-                    <button onClick={onClose} className="text-gray-500 hover:text-gray-700 dark:text-gray-400">
-                        ✕
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-2xl p-8 space-y-6">
+                <div className="flex justify-between items-center">
+                    <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">New Message</h2>
+                    <button onClick={onClose} className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        <XIcon className="h-5 w-5" />
                     </button>
                 </div>
-
                 <div className="space-y-4">
-                    <div>
-                        <input
-                            type="email"
-                            placeholder="To"
-                            className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-transparent text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            value={to}
-                            onChange={(e) => setTo(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Subject"
-                            className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-transparent text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            value={subject}
-                            onChange={(e) => setSubject(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <textarea
-                            placeholder="Write your message..."
-                            className="w-full h-64 p-2 border border-gray-300 dark:border-gray-700 rounded bg-transparent text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                            value={body}
-                            onChange={(e) => setBody(e.target.value)}
-                        />
-                    </div>
+                    <input
+                        type="email"
+                        placeholder="To"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded bg-transparent text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        value={to}
+                        onChange={(e) => setTo(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Subject"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded bg-transparent text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
+                    />
+                    <textarea
+                        placeholder="Write your message..."
+                        className="w-full h-48 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded bg-transparent text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                        value={body}
+                        onChange={(e) => setBody(e.target.value)}
+                    />
                 </div>
-
-                <div className="flex justify-end mt-6 space-x-3">
+                <div className="flex justify-end space-x-3">
                     <button
                         onClick={onClose}
                         className="px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
@@ -118,8 +102,14 @@ export default function ComposeModal({ isOpen, onClose }: ComposeModalProps) {
                     <button
                         onClick={handleSend}
                         disabled={sending}
-                        className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded font-medium disabled:opacity-50"
+                        className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded font-medium disabled:opacity-50 flex items-center justify-center"
                     >
+                        {sending ? (
+                            <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z" />
+                            </svg>
+                        ) : null}
                         {sending ? 'Sending...' : 'Send'}
                     </button>
                 </div>
