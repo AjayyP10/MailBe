@@ -1,10 +1,4 @@
-from openai import OpenAI
-from app.core.config import settings
-
-client = OpenAI(
-    api_key=settings.OPENAI_API_KEY,
-    base_url=settings.OPENAI_BASE_URL
-)
+from app.services.grok import chat
 
 SYSTEM_PROMPT = """
 You are MailMCP, an intelligent email assistant. 
@@ -26,13 +20,9 @@ def generate_reply(thread_content: str, style: str = "professional", keywords: s
     if keywords:
         prompt += f"\nKey points to include: {keywords}"
         
-    response = client.chat.completions.create(
-        model=settings.LLM_MODEL,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": prompt}
-        ],
-        temperature=0.7,
-    )
-    
-    return response.choices[0].message.content
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": prompt},
+    ]
+    result = chat(messages=messages, temperature=0.7, max_tokens=1024)
+    return result["choices"][0]["message"]["content"]

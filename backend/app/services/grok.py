@@ -6,11 +6,12 @@ import httpx
 # -------------------------------------------------
 # Configuration
 # -------------------------------------------------
-GROK_API_KEY = os.getenv(
-    "GROK_API_KEY",
-    "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",
+GROK_API_KEY = os.getenv("GROK_API_KEY", "")
+GROK_ENDPOINT = (
+    os.getenv("GROK_BASE_URL")
+    or os.getenv("OPENAI_BASE_URL")
+    or "https://api.x.ai/v1/chat/completions"
 )
-GROK_ENDPOINT = "https://api.x.ai/v1/chat/completions"
 
 
 def _prepare_headers() -> Dict[str, str]:
