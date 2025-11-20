@@ -6,7 +6,7 @@ import httpx
 # -------------------------------------------------
 # Configuration
 # -------------------------------------------------
-GROK_API_KEY = os.getenv("GROK_API_KEY", "")
+GROK_API_KEY = os.getenv("GROK_API_KEY", "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")
 GROK_ENDPOINT = (
     os.getenv("GROK_BASE_URL")
     or os.getenv("OPENAI_BASE_URL")
