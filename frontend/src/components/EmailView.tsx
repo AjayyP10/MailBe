@@ -76,6 +76,20 @@ const EmailView: React.FC<EmailViewProps> = ({ email, onGenerateReply, onScanPhi
         {email.body}
       </div>
 
+      {email.attachments && email.attachments.length > 0 && (
+        <div className="attachments" style={{ marginTop: '20px', paddingTop: '15px', borderTop: '1px solid #e9ecef' }}>
+          <h3>Attachments</h3>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {email.attachments.map((attachment) => (
+              <li key={attachment.id} style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
+                <span style={{ marginRight: '10px' }}>📎</span>
+                <span>{attachment.filename} ({(attachment.size / 1024).toFixed(2)} KB)</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {onGenerateReply && (
         <div className="reply-section" style={{ marginTop: '20px', padding: '15px', borderTop: '1px solid #e9ecef' }}>
           <h3>Generate Reply</h3>

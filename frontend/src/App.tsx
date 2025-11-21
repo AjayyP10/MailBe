@@ -11,6 +11,9 @@ function App() {
   const [emails, setEmails] = useState<Email[]>([]);
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
   const [activeFolder, setActiveFolder] = useState('Inbox');
+  const [isLoadingEmails, setIsLoadingEmails] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Check for token in URL params (after OAuth redirect)
@@ -40,6 +43,8 @@ function App() {
   }, [isAuthenticated, token]);
 
   const fetchEmails = async () => {
+    setIsLoadingEmails(true);
+    setError(null);
     try {
       const response = await fetch('http://localhost:3001/emails', {
         headers: {
@@ -50,10 +55,13 @@ function App() {
         const emailsData = await response.json();
         setEmails(emailsData);
       } else {
-        console.error('Failed to fetch emails');
+        setError('Failed to fetch emails. Please try again.');
       }
     } catch (error) {
       console.error('Error fetching emails:', error);
+      setError('Network error. Please check your connection.');
+    } finally {
+      setIsLoadingEmails(false);
     }
   };
 
@@ -107,6 +115,13 @@ function App() {
         <header>
           <h1>MailBe</h1>
           <div>
+            <input
+              type="text"
+              placeholder="Search emails..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
             <button onClick={() => handleLogin('google')}>Login with Google</button>
             <button onClick={() => handleLogin('microsoft')}>Login with Outlook</button>
           </div>
@@ -122,15 +137,36 @@ function App() {
     <div className="App">
       <header>
         <h1>MailBe</h1>
-        <button onClick={handleLogout}>Logout</button>
+        <div>
+          <input
+            type="text"
+            placeholder="Search emails..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+          <button onClick={handleLogout}>Logout</button>
+        </div>
       </header>
       <div className="email-container">
         <Sidebar activeFolder={activeFolder} onFolderChange={setActiveFolder} />
-        <EmailList
-          emails={emails.filter(email => email.category === activeFolder)}
-          selectedEmailId={selectedEmail?.id || null}
-          onEmailSelect={setSelectedEmail}
-        />
+        {isLoadingEmails ? (
+          <div className="loading">Loading emails...</div>
+        ) : error ? (
+          <div className="error">{error}</div>
+        ) : (
+          <EmailList
+            emails={emails.filter(email =>
+              email.category === activeFolder &&
+              (searchQuery === '' ||
+               email.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
+               email.from.toLowerCase().includes(searchQuery.toLowerCase()) ||
+               email.body.toLowerCase().includes(searchQuery.toLowerCase()))
+            )}
+            selectedEmailId={selectedEmail?.id || null}
+            onEmailSelect={setSelectedEmail}
+          />
+        )}
         <EmailView email={selectedEmail} onGenerateReply={generateReply} onScanPhishing={scanPhishing} />
       </div>
     </div>

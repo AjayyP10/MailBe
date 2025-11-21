@@ -6,18 +6,24 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeFolder, onFolderChange }) => {
-  const folders = ['Inbox', 'Promotional', 'Potential Scam', 'Scam'];
+  const folders = [
+    { name: 'Inbox', icon: '📧' },
+    { name: 'Promotional', icon: '📢' },
+    { name: 'Potential Scam', icon: '⚠️' },
+    { name: 'Scam', icon: '🚨' }
+  ];
 
   return (
     <div className="sidebar">
       <div className="folders">
         {folders.map((folder) => (
           <div
-            key={folder}
-            className={activeFolder === folder ? 'active' : ''}
-            onClick={() => onFolderChange(folder)}
+            key={folder.name}
+            className={activeFolder === folder.name ? 'active' : ''}
+            onClick={() => onFolderChange(folder.name)}
           >
-            {folder}
+            <span className="folder-icon">{folder.icon}</span>
+            {folder.name}
           </div>
         ))}
       </div>
