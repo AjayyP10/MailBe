@@ -1,9 +1,17 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '../generated/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { Pool } from 'pg';
 
+const connectionString = "postgresql://postgres:Pannicker@10@db.fjekymkvuuxokvkvwwek.supabase.co:5432/postgres";
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
 // @ts-ignore
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  adapter,
+  log: ['error'],
+});
 
 export interface AuthRequest extends Request {
   user?: any;

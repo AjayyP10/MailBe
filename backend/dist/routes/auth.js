@@ -7,11 +7,19 @@ const express_1 = __importDefault(require("express"));
 const passport_1 = __importDefault(require("passport"));
 const passport_google_oauth20_1 = require("passport-google-oauth20");
 const passport_microsoft_1 = require("passport-microsoft");
-const client_1 = require("../../node_modules/.prisma/client/client");
+const client_1 = require("../generated/client");
+const adapter_pg_1 = require("@prisma/adapter-pg");
+const pg_1 = require("pg");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const router = express_1.default.Router();
+const connectionString = "postgresql://postgres:Pannicker@10@db.fjekymkvuuxokvkvwwek.supabase.co:5432/postgres";
+const pool = new pg_1.Pool({ connectionString });
+const adapter = new adapter_pg_1.PrismaPg(pool);
 // @ts-ignore
-const prisma = new client_1.PrismaClient();
+const prisma = new client_1.PrismaClient({
+    adapter,
+    log: ['error'],
+});
 passport_1.default.use(new passport_google_oauth20_1.Strategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,

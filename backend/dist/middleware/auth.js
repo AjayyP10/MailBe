@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authenticateToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const client_1 = require("../../node_modules/.prisma/client/client");
+const client_1 = require("../generated/client");
 // @ts-ignore
 const prisma = new client_1.PrismaClient();
 const authenticateToken = async (req, res, next) => {

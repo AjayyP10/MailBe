@@ -1,38 +1,155 @@
 .App {
-  text-align: center;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+header h1 {
+  margin: 0;
+  color: #343a40;
+}
+
+header button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+header button:hover {
+  background-color: #0056b3;
+}
+
+.email-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .email-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .folders {
+    display: flex;
+    padding: 10px;
+    overflow-x: auto;
+  }
+
+  .folders div {
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+
+  .email-list {
+    width: 100%;
+    height: 200px;
+    border-right: none;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .email-view {
+    width: 100%;
+    flex: 1;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.sidebar {
+  width: 200px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #e9ecef;
+  padding: 20px 0;
+}
+
+.folders {
+  padding: 0 20px;
+}
+
+.folders div {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.folders div:hover {
+  background-color: #e9ecef;
+}
+
+.folders div.active {
+  background-color: #007bff;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.email-list {
+  width: 300px;
+  border-right: 1px solid #e9ecef;
+  overflow-y: auto;
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.email-item {
+  padding: 15px;
+  border-bottom: 1px solid #e9ecef;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.email-item:hover {
+  background-color: #f8f9fa;
+}
+
+.email-item.selected {
+  background-color: #e3f2fd;
+}
+
+.email-item h4 {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+}
+
+.email-item p {
+  margin: 0;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.email-view {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.email-view h2 {
+  margin-top: 0;
+}
+
+.email-view .meta {
+  margin-bottom: 20px;
+  color: #6c757d;
+}
+
+.email-view .body {
+  line-height: 1.6;
 }
