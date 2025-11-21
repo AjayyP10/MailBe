@@ -1,8 +1,0 @@
-build/
-
-# IDE
-.vscode/
-.idea/
-
-backend/.env
-.env
