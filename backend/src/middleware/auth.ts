@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '../../node_modules/.prisma/client/client';
+import { PrismaClient } from '../generated/client';
 
 // @ts-ignore
 const prisma = new PrismaClient();

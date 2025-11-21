@@ -2,7 +2,7 @@ import express from 'express';
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as MicrosoftStrategy } from 'passport-microsoft';
-import { PrismaClient } from '../../node_modules/.prisma/client/client';
+import { PrismaClient } from '../generated/client';
 import jwt from 'jsonwebtoken';
 
 const router = express.Router();

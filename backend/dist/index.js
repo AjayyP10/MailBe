@@ -8,13 +8,13 @@ const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const passport_1 = __importDefault(require("passport"));
-const client_1 = require("../node_modules/.prisma/client/client");
+const client_1 = require("./generated/client");
 const auth_1 = __importDefault(require("./routes/auth"));
 const emails_1 = __importDefault(require("./routes/emails"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 // @ts-ignore
-const prisma = new client_1.PrismaClient({});
+const prisma = new client_1.PrismaClient();
 const PORT = process.env.PORT || 3001;
 app.use((0, helmet_1.default)());
 app.use((0, cors_1.default)());

@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 
 function App() {
-  const [emails, setEmails] = useState([]);
 
   return (
     <div className="App">

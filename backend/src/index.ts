@@ -3,7 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import passport from 'passport';
-import { PrismaClient } from '../node_modules/.prisma/client/client';
+import { PrismaClient } from './generated/client';
 import authRoutes from './routes/auth';
 import emailsRoutes from './routes/emails';
 
@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 // @ts-ignore
-const prisma = new PrismaClient({});
+const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3001;
 
 app.use(helmet());
