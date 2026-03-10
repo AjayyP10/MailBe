@@ -1,0 +1,94 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: mailbe-postgres
+    environment:
+      POSTGRES_USER: mailbe
+      POSTGRES_PASSWORD: mailbe_dev_password
+      POSTGRES_DB: mailbe
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U mailbe']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mailbe-network
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: mailbe-ollama
+    ports:
+      - '11434:11434'
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - mailbe-network
+    # Note: Run `ollama pull llama2:7b` or `ollama pull mistral:7b` after starting
+
+  authentik-postgres:
+    image: postgres:16-alpine
+    container_name: mailbe-authentik-postgres
+    environment:
+      POSTGRES_USER: authentik
+      POSTGRES_PASSWORD: authentik_dev_password
+      POSTGRES_DB: authentik
+    volumes:
+      - authentik_postgres_data:/var/lib/postgresql/data
+    networks:
+      - mailbe-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U authentik']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  authentik:
+    image: ghcr.io/goauthentik/authentik:latest
+    container_name: mailbe-authentik
+    ports:
+      - '9000:9000'
+      - '9443:9443'
+    environment:
+      AUTHENTIK_REDIS__HOST: mailbe-redis
+      AUTHENTIK_POSTGRESQL__HOST: mailbe-authentik-postgres
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__PASSWORD: authentik_dev_password
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:-foobarbazquux}
+      AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD:-admin}
+    depends_on:
+      authentik-postgres:
+        condition: service_healthy
+      mailbe-redis:
+        condition: service_started
+    networks:
+      - mailbe-network
+
+  mailbe-redis:
+    image: redis:7-alpine
+    container_name: mailbe-redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - mailbe-network
+
+volumes:
+  postgres_data:
+  ollama_data:
+  authentik_postgres_data:
+  redis_data:
+
+networks:
+  mailbe-network:
+    driver: bridge
