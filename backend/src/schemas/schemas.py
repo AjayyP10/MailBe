@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 from datetime import datetime
 from typing import Optional, List
 from uuid import UUID
@@ -20,8 +20,7 @@ class UserResponse(UserBase):
     created_at: datetime
     updated_at: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 # Email Schemas
@@ -31,8 +30,7 @@ class AttachmentResponse(BaseModel):
     mime_type: str
     size: int
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class EmailBase(BaseModel):
@@ -51,14 +49,13 @@ class EmailResponse(EmailBase):
     sender: str
     is_read: bool
     is_starred: bool
-    category: Optional[str]
-    summary: Optional[str]
+    category: Optional[str] = None
+    summary: Optional[str] = None
     received_date: datetime
     created_at: datetime
     attachments: List[AttachmentResponse] = []
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class EmailListResponse(BaseModel):
@@ -68,11 +65,10 @@ class EmailListResponse(BaseModel):
     snippet: str
     is_read: bool
     is_starred: bool
-    category: Optional[str]
+    category: Optional[str] = None
     received_date: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 # Thread Schemas
@@ -82,12 +78,11 @@ class ThreadResponse(BaseModel):
     snippet: str
     message_count: int
     unread_count: int
-    category: Optional[str]
+    category: Optional[str] = None
     last_message_date: datetime
     created_at: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 # Draft Schemas
@@ -102,8 +97,7 @@ class DraftResponse(DraftCreate):
     created_at: datetime
     updated_at: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 # Auth Schemas

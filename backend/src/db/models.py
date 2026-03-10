@@ -27,7 +27,7 @@ class User(Base):
     smtp_password = Column(LargeBinary)  # AES-256 encrypted
     
     # Settings
-    preferences = Column(JSON, default={})
+    preferences = Column(JSON, default=dict)
     is_active = Column(Boolean, default=True)
     
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -67,7 +67,7 @@ class Email(Base):
     is_trash = Column(Boolean, default=False)
     
     # Labels and categories
-    labels = Column(ARRAY(String), default=[])
+    labels = Column(ARRAY(String), default=list)
     category = Column(String, index=True)  # Auto-categorized label
     
     # AI-generated content

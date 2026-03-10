@@ -1,9 +1,12 @@
 from pydantic_settings import BaseSettings
+from pydantic import ConfigDict
 from typing import List
 
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
+    
+    model_config = ConfigDict(env_file=".env", case_sensitive=False)
     
     # Database
     database_url: str = "postgresql://mailbe:mailbe_dev_password@postgres:5432/mailbe"
@@ -34,10 +37,6 @@ class Settings(BaseSettings):
     
     # CORS
     cors_origins: List[str] = ["http://localhost:3000", "http://localhost:3001"]
-    
-    class Config:
-        env_file = ".env"
-        case_sensitive = False
 
 
 settings = Settings()

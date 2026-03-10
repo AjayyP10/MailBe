@@ -1,13 +1,27 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from contextlib import asynccontextmanager
 from src.core.config import settings
 
-# Create FastAPI app
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Manage app lifecycle - startup and shutdown."""
+    # Startup
+    print("MailBe Backend Starting Up...")
+    # Initialize database connection, cache, etc.
+    yield
+    # Shutdown
+    print("MailBe Backend Shutting Down...")
+
+
+# Create FastAPI app with lifespan
 app = FastAPI(
     title="MailBe Backend",
     description="AI-powered email client backend API",
-    version="0.1.0"
+    version="0.1.0",
+    lifespan=lifespan
 )
 
 # Add CORS middleware
@@ -41,21 +55,6 @@ async def root():
 # @app.include_router(emails.router, prefix="/api/emails", tags=["emails"])
 # @app.include_router(ai.router, prefix="/api/ai", tags=["ai"])
 # @app.include_router(sync.router, prefix="/api/sync", tags=["sync"])
-
-
-# Startup event
-@app.on_event("startup")
-async def startup_event():
-    """Initialize app on startup."""
-    print("MailBe Backend Starting Up...")
-    # Initialize database connection, cache, etc.
-
-
-# Shutdown event
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Clean up on shutdown."""
-    print("MailBe Backend Shutting Down...")
 
 
 if __name__ == "__main__":
